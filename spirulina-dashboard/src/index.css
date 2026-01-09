@@ -1,3 +1,60 @@
+:root {
+  --card-bg: #ffffff;
+  --card-border: #e5e7eb;
+}
+
+.dark {
+  --card-bg: #020617;      /* dark card */
+  --card-border: #1e293b;  /* subtle border */
+}
+
+:root {
+  --bg-color: #ffffff;
+  --text-color: #0f172a;
+  --card-bg: #f1f5f9;
+  --navbar-bg: #ffffff;
+  --border-color: #e5e7eb;
+}
+
+.dark {
+  --bg-color: #0f172a;
+  --text-color: #e5e7eb;
+  --card-bg: #1e293b;
+  --navbar-bg: #020617;
+  --border-color: #334155;
+}
+
+/* ===============================
+   GLOBAL APPLY
+================================ */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* ===== THEME VARIABLES ===== */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #111827;
+  --card-bg: #f3f4f6;
+  --border-color: #e5e7eb;
+}
+
+.dark {
+  --bg-color: #0f172a;
+  --text-color: #e5e7eb;
+  --card-bg: #1e293b;
+  --border-color: #334155;
+}
+
+/* ===== GLOBAL APPLY ===== */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -21,6 +78,38 @@ body {
   background-color: #09461f;
   color: white;
 }
+.navbar {
+  background-color: var(--navbar-bg);
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.dashboard,
+.dashboard-wrapper {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.sensor-card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+.theme-toggle {
+  margin-left: 16px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.theme-toggle:hover {
+  opacity: 0.8;
+}
+
 
 /* LOGO AREA */
 .logo-container {
@@ -388,4 +477,99 @@ body {
 }
 .scroll-card:nth-child(4) {
   animation-delay: 4.5s;
+}
+/* ===============================
+   NAVBAR TEXT FIX (LIGHT + DARK)
+================================ */
+.navbar {
+  background-color: var(--navbar-bg);
+  color: var(--text-color);
+}
+
+.navbar span,
+.nav-links span,
+.logo-text {
+  color: var(--text-color) !important;
+}
+/* ===============================
+   SENSOR CARD DARK MODE FIX
+================================ */
+
+/* Card background stays clean */
+.sensor-card {
+  background-color: var(--card-bg);
+}
+
+/* Force readable text */
+.sensor-card h1,
+.sensor-card h2,
+.sensor-card h3,
+.sensor-card p,
+.sensor-card span,
+.sensor-card div {
+  color: var(--text-color) !important;
+  opacity: 1 !important;
+}
+
+/* Sensor VALUE (big number) */
+.sensor-card .value,
+.sensor-card .sensor-value {
+  color: var(--text-color) !important;
+  font-weight: 600;
+}
+/* ===============================
+   DARK MODE SENSOR CARDS
+================================ */
+
+.sensor-card {
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  transition: 
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+/* Text always readable */
+.sensor-card * {
+  color: var(--text-color) !important;
+  opacity: 1 !important;
+}
+
+/* Hover effect (no layout shift) */
+.sensor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+}
+.dark .sensor-card:hover {
+  box-shadow: 
+    0 0 0 1px rgba(56, 189, 248, 0.15),
+    0 16px 40px rgba(0, 0, 0, 0.6);
+}
+/* ==================================================
+   DARK MODE – SAFE OVERRIDES (NO LAYOUT CHANGE)
+================================================== */
+
+.dark .card {
+  background-color: #0f172a;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.dark .card,
+.dark .card h2,
+.dark .card .card-title,
+.dark .card p,
+.dark .card span {
+  color: #e5e7eb !important;
+  opacity: 1 !important;
+}
+
+.dark .card .card-title {
+  color: #94a3b8 !important;
+}
+
+.dark .card:hover {
+  box-shadow:
+    0 0 0 1px rgba(56, 189, 248, 0.15),
+    0 18px 40px rgba(0, 0, 0, 0.6);
 }

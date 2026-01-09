@@ -3,7 +3,7 @@ import { ref, onValue } from "firebase/database";
 import { db } from "../firebase";
 import SensorCard from "../components/SensorCard";
 
-export default function Dashboard() {
+export default function Dashboard({ language }) {
   const [data, setData] = useState(null);
 
   useEffect(() => {
@@ -14,27 +14,55 @@ export default function Dashboard() {
   if (!data) return <p className="loading">Loading live data...</p>;
 
   return (
-  <div className="dashboard-wrapper">
-    <div className="dashboard">
-      <h1 className="dashboard-title">Live Monitoring Dashboard</h1>
+    <div className="dashboard-wrapper">
+      <div className="dashboard">
+        <h1 className="dashboard-title">
+          {language === "en"
+            ? "Live Monitoring Dashboard"
+            : "लाइव निगरानी डैशबोर्ड"}
+        </h1>
 
-      <div className="status-row">
-        <span className="status-dot"></span>
-        <span>System Online · Real-time Firebase Sync</span>
+        <div className="status-row">
+          <span className="status-dot"></span>
+          <span>
+            {language === "en"
+              ? "System Online · Real-time Firebase Sync"
+              : "सिस्टम ऑनलाइन · रियल-टाइम फायरबेस सिंक"}
+          </span>
+        </div>
+
+        <div className="grid">
+          <SensorCard
+            title={language === "en" ? "Temperature" : "तापमान"}
+            value={data.temperature}
+            unit="°C"
+            icon="🌡"
+          />
+          <SensorCard
+            title={language === "en" ? "Humidity" : "आर्द्रता"}
+            value={data.humidity}
+            unit="%"
+            icon="💧"
+          />
+          <SensorCard
+            title={language === "en" ? "Light Intensity" : "प्रकाश तीव्रता"}
+            value={data.light}
+            unit="lux"
+            icon="💡"
+          />
+          <SensorCard
+            title={language === "en" ? "Air Quality" : "वायु गुणवत्ता"}
+            value={data.airQuality}
+            unit=""
+            icon="🌫"
+          />
+        </div>
+
+        <p className="time">
+          {language === "en" ? "Last updated:" : "अंतिम अपडेट:"}{" "}
+          {new Date(data.timestamp).toLocaleTimeString()}
+        </p>
       </div>
-
-      <div className="grid">
-        <SensorCard title="Temperature" value={data.temperature} unit="°C" icon="🌡" />
-        <SensorCard title="Humidity" value={data.humidity} unit="%" icon="💧" />
-        <SensorCard title="Light Intensity" value={data.light} unit="lux" icon="💡" />
-        <SensorCard title="Air Quality" value={data.airQuality} unit="" icon="🌫" />
-      </div>
-
-      <p className="time">
-        Last updated: {new Date(data.timestamp).toLocaleTimeString()}
-      </p>
     </div>
-  </div>
-);
-
+  );
 }

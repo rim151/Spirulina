@@ -1,4 +1,9 @@
-export default function Navbar() {
+export default function Navbar({
+  darkMode,
+  setDarkMode,
+  language,
+  setLanguage,
+}) {
   return (
     <nav className="navbar">
       <div className="logo-container">
@@ -7,9 +12,27 @@ export default function Navbar() {
       </div>
 
       <div className="nav-links">
-        <span>Dashboard</span>
-        <span>Analytics</span>
-        <span>About</span>
+        <span>{language === "en" ? "Dashboard" : "डैशबोर्ड"}</span>
+        <span>{language === "en" ? "Analytics" : "विश्लेषण"}</span>
+        <span>{language === "en" ? "About" : "परिचय"}</span>
+
+        {/* Dark Mode */}
+        <button
+          className="theme-toggle"
+          onClick={() => setDarkMode(!darkMode)}
+        >
+          {darkMode ? "🌙" : "☀️"}
+        </button>
+
+        {/* Language Toggle */}
+        <button
+          className="theme-toggle"
+          onClick={() =>
+            setLanguage(language === "en" ? "hi" : "en")
+          }
+        >
+          {language === "en" ? "हिंदी" : "English"}
+        </button>
       </div>
     </nav>
   );

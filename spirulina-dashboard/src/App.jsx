@@ -13,6 +13,12 @@ export default function App() {
     localStorage.getItem("lang") || "en"
   );
 
+  const [authenticated, setAuthenticated] = useState(
+  localStorage.getItem("auth") === "true"
+);
+
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -27,6 +33,16 @@ export default function App() {
     localStorage.setItem("lang", language);
   }, [language]);
 
+  const handleLogin = () => {
+  setLoading(true);
+  setTimeout(() => {
+    setLoading(false);
+    setAuthenticated(true);
+    localStorage.setItem("auth", "true");
+  }, 1500);
+};
+
+
   return (
     <>
       <Navbar
@@ -36,8 +52,50 @@ export default function App() {
         setLanguage={setLanguage}
       />
 
-      <Hero language={language} />
-      <Dashboard language={language} />
+      {!authenticated ? (
+        <LoginScreen
+          language={language}
+          loading={loading}
+          onLogin={handleLogin}
+        />
+      ) : (
+        <>
+          <Hero language={language} />
+          <Dashboard language={language} />
+        </>
+      )}
     </>
+  );
+}
+
+/* ===============================
+   LOGIN SCREEN
+================================ */
+function LoginScreen({ language, loading, onLogin }) {
+  return (
+    <div className="login-wrapper">
+      <div className="login-card">
+        <h1 className="login-title">
+          {language === "en"
+            ? "Smart Spirulina Monitoring System"
+            : "स्मार्ट स्पाइरुलिना निगरानी प्रणाली"}
+        </h1>
+
+        <p className="login-subtitle">
+          {language === "en"
+            ? "Monitor real-time growth parameters using IoT and AI analytics"
+            : "IoT और AI एनालिटिक्स के माध्यम से रियल-टाइम निगरानी"}
+        </p>
+
+        <button
+          className="login-btn"
+          onClick={onLogin}
+          disabled={loading}
+        >
+          {loading ? <span className="loader"></span> :
+            language === "en" ? "Login to Dashboard" : "डैशबोर्ड में लॉगिन करें"}
+        </button>
+      </div>
+    </div>
   );
 }

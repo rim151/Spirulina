@@ -573,3 +573,293 @@ body {
     0 0 0 1px rgba(56, 189, 248, 0.15),
     0 18px 40px rgba(0, 0, 0, 0.6);
 }
+
+/* ===============================
+   WELCOME SCREEN
+================================ */
+
+.welcome-wrapper {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 25px;
+}
+
+.welcome-title {
+  font-size: 36px;
+  font-weight: 700;
+  max-width: 800px;
+}
+
+.connect-btn {
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  background: #16a34a;
+  color: white;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.connect-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(22, 163, 74, 0.35);
+}
+
+/* Dark mode support */
+.dark .connect-btn {
+  background: #22c55e;
+}
+
+/* ===============================
+   LOGIN PAGE
+================================ */
+
+.login-wrapper {
+  min-height: calc(100vh - 70px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.login-card {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 50px 40px;
+  max-width: 520px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+}
+
+.login-title {
+  font-size: 34px;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.login-subtitle {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 35px;
+  opacity: 0.85;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.login-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(34,197,94,0.4);
+}
+
+.login-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* ===============================
+   LOADER
+================================ */
+
+.loader {
+  width: 22px;
+  height: 22px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Dark mode enhancement */
+.dark .login-card {
+  box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+}
+/* =========================================
+   LOGIN PAGE – DARK MODE BACKGROUND FIX
+========================================= */
+
+.login-wrapper {
+  background: var(--bg-color);
+  transition: background-color 0.3s ease;
+}
+
+/* Dark mode background gradient */
+.dark .login-wrapper {
+  background: radial-gradient(
+      circle at top,
+      #0f172a 0%,
+      #020617 70%
+  );
+}
+/* =========================================
+   LOGIN CARD – PREMIUM UPGRADE
+========================================= */
+
+.login-card {
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+/* Soft glow border in dark mode */
+.dark .login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(34,197,94,0.6),
+    rgba(16,185,129,0.2),
+    rgba(34,197,94,0.6)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Slight floating animation */
+.login-card {
+  animation: floatLogin 6s ease-in-out infinite;
+}
+
+@keyframes floatLogin {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+/* =========================================
+   LOGIN BUTTON – INTERACTION
+========================================= */
+
+.login-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.25),
+    transparent
+  );
+  transform: translateX(-100%);
+}
+
+.login-btn:hover::after {
+  transform: translateX(100%);
+  transition: transform 0.6s ease;
+}
+/* =========================================
+   LOGIN PAGE TEXT FIX
+========================================= */
+
+.login-card,
+.login-card h1,
+.login-card p {
+  color: var(--text-color);
+}
+
+/* Explicit dark-mode text boost */
+.dark .login-card h1,
+.dark .login-card p {
+  color: #e5e7eb;
+}
+/* =========================================
+   LOGIN PAGE TEXT FIX
+========================================= */
+
+.login-card,
+.login-card h1,
+.login-card p {
+  color: var(--text-color);
+}
+
+/* Explicit dark-mode text boost */
+.dark .login-card h1,
+.dark .login-card p {
+  color: #e5e7eb;
+}
+/* =========================================
+   LOGIN CARD GLOW – LIGHT MODE
+========================================= */
+
+.login-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(
+    135deg,
+    rgba(34,197,94,0.5),
+    rgba(16,185,129,0.25),
+    rgba(34,197,94,0.5)
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+/* Glow on hover (light mode) */
+.login-card:hover::before {
+  opacity: 1;
+}
+/* =========================================
+   LOGIN CARD GLOW – DARK MODE
+========================================= */
+
+.dark .login-card::before {
+  opacity: 1;
+  background: linear-gradient(
+    135deg,
+    rgba(34,197,94,0.7),
+    rgba(16,185,129,0.3),
+    rgba(34,197,94,0.7)
+  );
+}

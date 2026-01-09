@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Navbar from "./components/navbar";
 import Hero from "./components/Hero";
 import Dashboard from "./pages/Dashboard";
+import SensorCard from "./components/SensorCard";
 import "./index.css";
 
 export default function App() {
@@ -14,10 +15,14 @@ export default function App() {
   );
 
   const [authenticated, setAuthenticated] = useState(
-  localStorage.getItem("auth") === "true"
-);
+    localStorage.getItem("auth") === "true"
+  );
 
   const [loading, setLoading] = useState(false);
+
+  // 🔑 ThingSpeak Config
+  const CHANNEL_ID = "3224307";
+  const READ_API_KEY = "XI1DDMZKFM76IK35";
 
   useEffect(() => {
     if (darkMode) {
@@ -34,14 +39,13 @@ export default function App() {
   }, [language]);
 
   const handleLogin = () => {
-  setLoading(true);
-  setTimeout(() => {
-    setLoading(false);
-    setAuthenticated(true);
-    localStorage.setItem("auth", "true");
-  }, 1500);
-};
-
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      setAuthenticated(true);
+      localStorage.setItem("auth", "true");
+    }, 1500);
+  };
 
   return (
     <>
@@ -51,6 +55,7 @@ export default function App() {
         language={language}
         setLanguage={setLanguage}
       />
+    
 
       {!authenticated ? (
         <LoginScreen
@@ -62,6 +67,50 @@ export default function App() {
         <>
           <Hero language={language} />
           <Dashboard language={language} />
+
+          {/* 🔴 ThingSpeak Sensor Cards Section */}
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+              gap: "20px",
+              padding: "20px",
+            }}
+          >
+            <SensorCard
+              title="Temperature"
+              icon="🌡️"
+              unit="°C"
+              channelId={CHANNEL_ID}
+              fieldNumber={1}
+              readApiKey={READ_API_KEY}
+            />
+
+            <SensorCard
+              title="Humidity"
+              icon="💧"
+              unit="%"
+              channelId={CHANNEL_ID}
+              fieldNumber={2}
+              readApiKey={READ_API_KEY}
+            />
+
+            <SensorCard
+              title="Light Intensity"
+              icon="💡"
+              channelId={CHANNEL_ID}
+              fieldNumber={3}
+              readApiKey={READ_API_KEY}
+            />
+
+            <SensorCard
+              title="Odour Level"
+              icon="👃"
+              channelId={CHANNEL_ID}
+              fieldNumber={4}
+              readApiKey={READ_API_KEY}
+            />
+          </div>
         </>
       )}
     </>
@@ -87,13 +136,14 @@ function LoginScreen({ language, loading, onLogin }) {
             : "IoT और AI एनालिटिक्स के माध्यम से रियल-टाइम निगरानी"}
         </p>
 
-        <button
-          className="login-btn"
-          onClick={onLogin}
-          disabled={loading}
-        >
-          {loading ? <span className="loader"></span> :
-            language === "en" ? "Login to Dashboard" : "डैशबोर्ड में लॉगिन करें"}
+        <button className="login-btn" onClick={onLogin} disabled={loading}>
+          {loading ? (
+            <span className="loader"></span>
+          ) : language === "en" ? (
+            "Login to Dashboard"
+          ) : (
+            "डैशबोर्ड में लॉगिन करें"
+          )}
         </button>
       </div>
     </div>

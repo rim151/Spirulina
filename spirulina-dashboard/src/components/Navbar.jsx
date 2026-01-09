@@ -4,6 +4,15 @@ export default function Navbar({
   language,
   setLanguage,
 }) {
+
+  // 🔽 Scroll to Live Data section
+  const handleLiveDataClick = () => {
+    const liveSection = document.getElementById("live-data");
+    if (liveSection) {
+      liveSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav className="navbar">
       <div className="logo-container">
@@ -12,7 +21,14 @@ export default function Navbar({
       </div>
 
       <div className="nav-links">
-        <span>{language === "en" ? "Dashboard" : "डैशबोर्ड"}</span>
+        {/* ✅ LIVE DATA (SCROLL) */}
+        <span
+          style={{ cursor: "pointer" }}
+          onClick={handleLiveDataClick}
+        >
+          {language === "en" ? "Live Data" : "लाइव डेटा"}
+        </span>
+
         <span>{language === "en" ? "Analytics" : "विश्लेषण"}</span>
         <span>{language === "en" ? "About" : "परिचय"}</span>
 

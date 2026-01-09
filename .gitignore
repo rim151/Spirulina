@@ -1,0 +1,11 @@
+# Node
+node_modules/
+
+# Environment files
+.env
+
+# Firebase / secrets
+firebase-key.json
+
+# Logs
+*.log

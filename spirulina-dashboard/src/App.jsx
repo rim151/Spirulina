@@ -1,9 +1,12 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Dashboard from "./pages/Dashboard";
+import Analytics from "./pages/Analytics";
 import Footer from "./components/Footer";
+
 import "./index.css";
 
 export default function App() {
@@ -43,7 +46,7 @@ export default function App() {
       />
 
       <Routes>
-        {/* HOME / WELCOME PAGE */}
+        {/* HOME */}
         <Route
           path="/"
           element={
@@ -58,15 +61,19 @@ export default function App() {
           }
         />
 
-        {/* LIVE DATA PAGE */}
+        {/* DASHBOARD */}
         <Route
           path="/live"
           element={
-            isLoggedIn ? (
-              <Dashboard language={language} />
-            ) : (
-              <Navigate to="/" />
-            )
+            isLoggedIn ? <Dashboard language={language} /> : <Navigate to="/" />
+          }
+        />
+
+        {/* ✅ ANALYTICS */}
+        <Route
+          path="/analytics"
+          element={
+            isLoggedIn ? <Analytics /> : <Navigate to="/" />
           }
         />
       </Routes>

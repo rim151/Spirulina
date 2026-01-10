@@ -6,9 +6,6 @@ import SensorCard from "../components/SensorCard";
 export default function Dashboard({ language }) {
   const [data, setData] = useState(null);
 
-  // 🔴 ESP32-CAM STREAM URL (yahin apna original URL daalo)
-  const CAMERA_URL = "http://192.168.1.105:81/stream";
-
   useEffect(() => {
     const r = ref(db, "sensors");
     onValue(r, (snap) => {
@@ -64,28 +61,6 @@ export default function Dashboard({ language }) {
             unit=""
             icon="🌫"
           />
-        </div>
-
-        {/* 🎥 CAMERA SECTION (LIVE DATA KE NICHE) */}
-        <div className="camera-section">
-          <div className="camera-header">
-            <h2 className="camera-title">
-              {language === "en" ? "Live Camera Feed" : "लाइव कैमरा फ़ीड"}
-            </h2>
-
-            <span className="camera-live">
-              <span className="live-dot"></span>
-              LIVE
-            </span>
-          </div>
-
-          <div className="camera-card">
-            <img
-              src={CAMERA_URL}
-              alt="ESP32 Camera Live"
-              className="camera-feed"
-            />
-          </div>
         </div>
 
         {/* ⏱ LAST UPDATED */}

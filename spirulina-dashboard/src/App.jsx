@@ -3,6 +3,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Dashboard from "./pages/Dashboard";
+import Footer from "./components/Footer";
 import "./index.css";
 
 export default function App() {
@@ -42,12 +43,15 @@ export default function App() {
       />
 
       <Routes>
-        {/* HOME */}
+        {/* HOME / WELCOME PAGE */}
         <Route
           path="/"
           element={
             isLoggedIn ? (
-              <Hero language={language} />
+              <>
+                <Hero language={language} />
+                <Footer language={language} />
+              </>
             ) : (
               <LoginScreen language={language} onLogin={handleLogin} />
             )

@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { db } from "../firebase";
 import SensorCard from "../components/SensorCard";
+import Footer from "../components/Footer"; // ✅ ADDED
+
+
 
 export default function Dashboard({ language }) {
   const [data, setData] = useState(null);
@@ -19,16 +22,15 @@ export default function Dashboard({ language }) {
   if (!data) return <p className="loading">Loading live data...</p>;
 
   return (
-    <div className="dashboard-wrapper">
+    // ✅ ID added for navbar scroll (NO logic change)
+    <div className="dashboard-wrapper" id="live-data">
       <div className="dashboard">
-        {/* 🔹 TITLE */}
         <h1 className="dashboard-title">
           {language === "en"
             ? "Live Monitoring Dashboard"
             : "लाइव निगरानी डैशबोर्ड"}
         </h1>
 
-        {/* 🔹 STATUS */}
         <div className="status-row">
           <span className="status-dot"></span>
           <span>
@@ -38,7 +40,6 @@ export default function Dashboard({ language }) {
           </span>
         </div>
 
-        {/* 🔹 LIVE SENSOR DATA */}
         <div className="grid">
           <SensorCard
             title={language === "en" ? "Temperature" : "तापमान"}
@@ -46,18 +47,21 @@ export default function Dashboard({ language }) {
             unit="°C"
             icon="🌡"
           />
+
           <SensorCard
             title={language === "en" ? "Humidity" : "आर्द्रता"}
             value={data.humidity}
             unit="%"
             icon="💧"
           />
+
           <SensorCard
             title={language === "en" ? "Light Intensity" : "प्रकाश तीव्रता"}
             value={data.light}
             unit="lux"
             icon="💡"
           />
+
           <SensorCard
             title={language === "en" ? "Air Quality" : "वायु गुणवत्ता"}
             value={data.airQuality}
@@ -66,29 +70,6 @@ export default function Dashboard({ language }) {
           />
         </div>
 
-        {/* 🎥 CAMERA SECTION (LIVE DATA KE NICHE) */}
-        <div className="camera-section">
-          <div className="camera-header">
-            <h2 className="camera-title">
-              {language === "en" ? "Live Camera Feed" : "लाइव कैमरा फ़ीड"}
-            </h2>
-
-            <span className="camera-live">
-              <span className="live-dot"></span>
-              LIVE
-            </span>
-          </div>
-
-          <div className="camera-card">
-            <img
-              src={CAMERA_URL}
-              alt="ESP32 Camera Live"
-              className="camera-feed"
-            />
-          </div>
-        </div>
-
-        {/* ⏱ LAST UPDATED */}
         <p className="time">
           {language === "en" ? "Last updated:" : "अंतिम अपडेट:"}{" "}
           {data.timestamp

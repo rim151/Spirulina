@@ -964,3 +964,97 @@ body {
     rgba(34,197,94,0.7)
   );
 }
+.spirulina-info {
+  padding: 60px 8%;
+  background: var(--bg-soft, #f6fff9);
+  text-align: center;
+}
+
+.info-title {
+  font-size: 2.2rem;
+  margin-bottom: 16px;
+}
+
+.info-title span {
+  color: #2ea44f;
+}
+
+.info-description {
+  max-width: 900px;
+  margin: 0 auto 40px;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  opacity: 0.9;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.benefit-card {
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(46, 164, 79, 0.08);
+  font-weight: 500;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.benefit-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(46, 164, 79, 0.2);
+}
+.footer {
+  margin-top: 80px;
+  background: linear-gradient(
+    to top,
+    rgba(46, 164, 79, 0.12),
+    rgba(46, 164, 79, 0.04)
+  );
+  padding: 50px 8% 20px;
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.footer-title span {
+  color: #2ea44f;
+}
+
+.footer-desc {
+  max-width: 600px;
+  margin: 0 auto 25px;
+  font-size: 0.95rem;
+  opacity: 0.85;
+  line-height: 1.6;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+}
+
+.footer-links span {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.footer-links span:hover {
+  color: #2ea44f;
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  padding-top: 15px;
+  font-size: 0.85rem;
+  opacity: 0.7;
+}

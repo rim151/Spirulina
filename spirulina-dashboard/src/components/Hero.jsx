@@ -108,7 +108,7 @@ export default function Hero({ language }) {
       <div className="benefit-card">🛡 Boosts Immunity</div>
       <div className="benefit-card">❤️ Improves Heart Health</div>
       <div className="benefit-card">🧠 Enhances Brain Function</div>
-      <div className="benefit-card">🩸 Regulates Blood Sugar</div>
+      
     </>
   ) : (
     <>
@@ -116,7 +116,7 @@ export default function Hero({ language }) {
       <div className="benefit-card">🛡 रोग प्रतिरोधक क्षमता बढ़ाता है</div>
       <div className="benefit-card">❤️ हृदय स्वास्थ्य में सुधार</div>
       <div className="benefit-card">🧠 मस्तिष्क कार्य में सुधार</div>
-      <div className="benefit-card">🩸 रक्त शर्करा नियंत्रित करता है</div>
+      
     </>
   )}
 </div>

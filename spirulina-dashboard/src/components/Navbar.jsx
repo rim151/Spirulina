@@ -31,7 +31,7 @@ export default function Navbar({
 {/* ⚙️ SETTINGS DROPDOWN */}
 <div className="settings">
   <span className="settings-btn">
-    {language === "en" ? "Settings" : "सेटिंग्स"} ⚙️
+    {language === "en" ? "Settings" : "सेटिंग्स"} 
   </span>
 
   <div className="settings-dropdown">

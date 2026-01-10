@@ -18,9 +18,8 @@ export default function App() {
     localStorage.getItem("lang") || "en"
   );
 
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    localStorage.getItem("dashboard") === "true"
-  );
+  // 🔥 LOGIN REMOVED → always logged in
+  const isLoggedIn = true;
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", darkMode);
@@ -30,11 +29,6 @@ export default function App() {
   useEffect(() => {
     localStorage.setItem("lang", language);
   }, [language]);
-
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    localStorage.setItem("dashboard", "true");
-  };
 
   return (
     <>
@@ -50,31 +44,29 @@ export default function App() {
         <Route
           path="/"
           element={
-            isLoggedIn ? (
-              <>
-                <Hero language={language} />
-                <Footer language={language} />
-              </>
-            ) : (
-              <LoginScreen language={language} onLogin={handleLogin} />
-            )
+            <>
+              <Hero language={language} />
+              <Footer language={language} />
+            </>
           }
         />
 
         {/* DASHBOARD */}
         <Route
           path="/live"
-          element={
-            isLoggedIn ? <Dashboard language={language} /> : <Navigate to="/" />
-          }
+          element={<Dashboard language={language} />}
         />
 
-        {/* ✅ ANALYTICS */}
+        {/* ANALYTICS */}
         <Route
           path="/analytics"
-          element={
-            isLoggedIn ? <Analytics /> : <Navigate to="/" />
-          }
+          element={<Analytics />}
+        />
+
+        {/* FALLBACK */}
+        <Route
+          path="*"
+          element={<Navigate to="/" />}
         />
       </Routes>
     </>

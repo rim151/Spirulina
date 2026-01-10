@@ -26,37 +26,37 @@ export default function Navbar({
           {language === "en" ? "Live Data" : "लाइव डेटा"}
         </span>
 
-        <span>{language === "en" ? "Analytics" : "विश्लेषण"}</span>
+<span>{language === "en" ? "Analytics" : "विश्लेषण"}</span>
 
-        {/* ⚙️ SETTINGS */}
-        <div className="settings-wrapper">
-          <span
-            style={{ cursor: "pointer" }}
-            onClick={() => setOpenSettings(!openSettings)}
-          >
-            {language === "en" ? "Settings" : "सेटिंग्स"}
-          </span>
+{/* ⚙️ SETTINGS DROPDOWN */}
+<div className="settings">
+  <span className="settings-btn">
+    {language === "en" ? "Settings" : "सेटिंग्स"} ⚙️
+  </span>
 
-          {openSettings && (
-            <div className="settings-dropdown">
-              <div
-                className="settings-item"
-                onClick={() => setDarkMode(!darkMode)}
-              >
-                {darkMode ? "🌙 Dark Mode" : "☀️ Light Mode"}
-              </div>
+  <div className="settings-dropdown">
+    {/* Dark Mode */}
+    <div
+      className="settings-option"
+      onClick={() => setDarkMode(!darkMode)}
+    >
+      <span>🌙 Dark Mode</span>
+      <span>{darkMode ? "On" : "Off"}</span>
+    </div>
 
-              <div
-                className="settings-item"
-                onClick={() =>
-                  setLanguage(language === "en" ? "hi" : "en")
-                }
-              >
-                {language === "en" ? "🌐 हिंदी" : "🌐 English"}
-              </div>
-            </div>
-          )}
-        </div>
+    {/* Language */}
+    <div className="settings-option">
+      <span>🌐 Language</span>
+      <select
+        value={language}
+        onChange={(e) => setLanguage(e.target.value)}
+      >
+        <option value="en">English</option>
+        <option value="hi">हिंदी</option>
+      </select>
+    </div>
+  </div>
+</div>
       </div>
     </nav>
   );

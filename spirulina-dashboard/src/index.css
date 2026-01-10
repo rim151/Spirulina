@@ -1006,7 +1006,7 @@ body {
   box-shadow: 0 10px 25px rgba(46, 164, 79, 0.2);
 }
 .footer {
-  margin-top: 80px;
+  margin-top: 0px;
   background: linear-gradient(
     to top,
     rgba(46, 164, 79, 0.12),
@@ -1057,4 +1057,106 @@ body {
   padding-top: 15px;
   font-size: 0.85rem;
   opacity: 0.7;
+}
+.settings {
+  position: relative;
+}
+
+.settings-btn {
+  cursor: pointer;
+}
+
+.settings-dropdown {
+  position: absolute;
+  top: 120%;
+  right: 0;
+  background: var(--bg, #ffffff);
+  border-radius: 10px;
+  padding: 12px;
+  min-width: 200px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: none;
+  z-index: 1000;
+}
+
+.settings:hover .settings-dropdown {
+  display: block;
+}
+
+.settings-option {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.settings-option:hover {
+  background: rgba(46, 164, 79, 0.1);
+  border-radius: 6px;
+}
+
+.settings-option select {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+/* ===== SETTINGS DROPDOWN FIX ===== */
+
+.settings-dropdown {
+  background: #ffffff !important;
+  color: #111827 !important;
+}
+
+/* Text inside options */
+.settings-option {
+  color: #111827 !important;
+}
+
+/* Span text (this is the missing part) */
+.settings-option span {
+  color: #111827 !important;
+  font-weight: 500;
+}
+
+/* Select text */
+.settings-option select {
+  color: #111827 !important;
+  background: transparent;
+}
+.dark .settings-dropdown {
+  background: #1f2937 !important;
+}
+
+.dark .settings-option,
+.dark .settings-option span,
+.dark .settings-option select {
+  color: #e5e7eb !important;
+}
+/* ===== FOOTER DARK MODE SUPPORT ===== */
+
+.dark .footer {
+  background: linear-gradient(
+    to top,
+    rgba(17, 24, 39, 0.95),
+    rgba(17, 24, 39, 0.85)
+  );
+  color: #e5e7eb;
+}
+
+.dark .footer-title,
+.dark .footer-desc,
+.dark .footer-links span,
+.dark .footer-bottom {
+  color: #e5e7eb;
+}
+
+.dark .footer-links span:hover {
+  color: #22c55e;
+}
+
+.dark .footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
 }

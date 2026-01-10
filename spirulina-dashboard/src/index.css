@@ -12,7 +12,7 @@
   --bg-color: #ffffff;
   --text-color: #0f172a;
   --card-bg: #f1f5f9;
-  --navbar-bg: #ffffff;
+  --navbar-bg: #09461f;
   --border-color: #e5e7eb;
 }
 
@@ -489,7 +489,7 @@ body {
 .navbar span,
 .nav-links span,
 .logo-text {
-  color: var(--text-color) !important;
+  color: white !important;
 }
 /* ===============================
    SENSOR CARD DARK MODE FIX

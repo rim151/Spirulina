@@ -1,30 +1,29 @@
+import { useNavigate } from "react-router-dom";
+
 export default function Navbar({
   darkMode,
   setDarkMode,
   language,
   setLanguage,
 }) {
-
-  // 🔽 Scroll to Live Data section
-  const handleLiveDataClick = () => {
-    const liveSection = document.getElementById("live-data");
-    if (liveSection) {
-      liveSection.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <nav className="navbar">
-      <div className="logo-container">
+      <div
+        className="logo-container"
+        onClick={() => navigate("/")}
+        style={{ cursor: "pointer" }}
+      >
         <img src="/logo.jpg" alt="SpiraTech Logo" className="logo-img" />
         <span className="logo-text">SpiraTech</span>
       </div>
 
       <div className="nav-links">
-        {/* ✅ LIVE DATA (SCROLL) */}
+        {/* LIVE DATA */}
         <span
           style={{ cursor: "pointer" }}
-          onClick={handleLiveDataClick}
+          onClick={() => navigate("/live")}
         >
           {language === "en" ? "Live Data" : "लाइव डेटा"}
         </span>
@@ -32,7 +31,7 @@ export default function Navbar({
         <span>{language === "en" ? "Analytics" : "विश्लेषण"}</span>
         <span>{language === "en" ? "About" : "परिचय"}</span>
 
-        {/* Dark Mode */}
+        {/* 🌙 Dark Mode – CSS restored */}
         <button
           className="theme-toggle"
           onClick={() => setDarkMode(!darkMode)}
@@ -40,7 +39,7 @@ export default function Navbar({
           {darkMode ? "🌙" : "☀️"}
         </button>
 
-        {/* Language Toggle */}
+        {/* 🌐 Language – CSS restored */}
         <button
           className="theme-toggle"
           onClick={() =>

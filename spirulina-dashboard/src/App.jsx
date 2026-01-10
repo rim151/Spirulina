@@ -1,44 +1,34 @@
 import { useEffect, useState } from "react";
-import Navbar from "./components/navbar";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Dashboard from "./pages/Dashboard";
 import "./index.css";
 
 export default function App() {
-  // Dark mode state
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
 
-  // Language state
   const [language, setLanguage] = useState(
     localStorage.getItem("lang") || "en"
   );
 
-  // Dashboard access state
-  const [goToDashboard, setGoToDashboard] = useState(
+  const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.getItem("dashboard") === "true"
   );
 
-  // Apply dark mode
   useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-    }
+    document.documentElement.classList.toggle("dark", darkMode);
+    localStorage.setItem("theme", darkMode ? "dark" : "light");
   }, [darkMode]);
 
-  // Save language
   useEffect(() => {
     localStorage.setItem("lang", language);
   }, [language]);
 
-  // Go to dashboard handler
-  const handleGoToDashboard = () => {
-    setGoToDashboard(true);
+  const handleLogin = () => {
+    setIsLoggedIn(true);
     localStorage.setItem("dashboard", "true");
   };
 
@@ -51,44 +41,31 @@ export default function App() {
         setLanguage={setLanguage}
       />
 
-      {!goToDashboard ? (
-        <LoginScreen
-          language={language}
-          onGoToDashboard={handleGoToDashboard}
+      <Routes>
+        {/* HOME */}
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? (
+              <Hero language={language} />
+            ) : (
+              <LoginScreen language={language} onLogin={handleLogin} />
+            )
+          }
         />
-      ) : (
-        <>
-          <Hero language={language} />
-          <Dashboard language={language} />
-        </>
-      )}
+
+        {/* LIVE DATA PAGE */}
+        <Route
+          path="/live"
+          element={
+            isLoggedIn ? (
+              <Dashboard language={language} />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
+        />
+      </Routes>
     </>
-  );
-}
-
-/* ===============================
-   LOGIN / GO TO DASHBOARD SCREEN
-================================ */
-function LoginScreen({ language, onGoToDashboard }) {
-  return (
-    <div className="login-wrapper">
-      <div className="login-card">
-        <h1 className="login-title">
-          {language === "en"
-            ? "Smart Spirulina Monitoring System"
-            : "स्मार्ट स्पाइरुलिना निगरानी प्रणाली"}
-        </h1>
-
-        <p className="login-subtitle">
-          {language === "en"
-            ? "Click below to access the monitoring dashboard"
-            : "डैशबोर्ड खोलने के लिए नीचे क्लिक करें"}
-        </p>
-
-        <button className="login-btn" onClick={onGoToDashboard}>
-          {language === "en" ? "Go to Dashboard" : "डैशबोर्ड पर जाएं"}
-        </button>
-      </div>
-    </div>
   );
 }

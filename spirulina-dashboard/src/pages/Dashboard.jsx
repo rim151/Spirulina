@@ -8,13 +8,16 @@ export default function Dashboard({ language }) {
 
   useEffect(() => {
     const r = ref(db, "sensors");
-    onValue(r, snap => setData(snap.val()));
+    onValue(r, (snap) => {
+      setData(snap.val());
+    });
   }, []);
 
   if (!data) return <p className="loading">Loading live data...</p>;
 
   return (
-    <div className="dashboard-wrapper">
+    // ✅ ID added for navbar scroll (NO logic change)
+    <div className="dashboard-wrapper" id="live-data">
       <div className="dashboard">
         <h1 className="dashboard-title">
           {language === "en"
@@ -38,18 +41,21 @@ export default function Dashboard({ language }) {
             unit="°C"
             icon="🌡"
           />
+
           <SensorCard
             title={language === "en" ? "Humidity" : "आर्द्रता"}
             value={data.humidity}
             unit="%"
             icon="💧"
           />
+
           <SensorCard
             title={language === "en" ? "Light Intensity" : "प्रकाश तीव्रता"}
             value={data.light}
             unit="lux"
             icon="💡"
           />
+
           <SensorCard
             title={language === "en" ? "Air Quality" : "वायु गुणवत्ता"}
             value={data.airQuality}
@@ -60,7 +66,9 @@ export default function Dashboard({ language }) {
 
         <p className="time">
           {language === "en" ? "Last updated:" : "अंतिम अपडेट:"}{" "}
-          {new Date(data.timestamp).toLocaleTimeString()}
+          {data.timestamp
+            ? new Date(data.timestamp).toLocaleTimeString()
+            : "—"}
         </p>
       </div>
     </div>
